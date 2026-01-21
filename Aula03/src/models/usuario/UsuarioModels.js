@@ -37,4 +37,9 @@ export class UsuarioModel {
             return true;
 
     }
+    static buscarPorEmail(email){
+        return usuarios.find(u => u.email === email);
+    }
+
+    
 }

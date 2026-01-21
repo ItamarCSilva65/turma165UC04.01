@@ -3,6 +3,8 @@ import usuarioRoutes from "./src/routes/usuario/UsuarioRoutes.js";
 const app = express();
 const PORT = 3000;
 
+app.use(express.json());
+
 app.use("/usuarios", usuarioRoutes);
 
 app.get("/", (req, res)=>{
@@ -10,5 +12,5 @@ app.get("/", (req, res)=>{
 });
 
 app.listen(PORT, ()=>{
-    console.log(`Aplicação rodando em http://localhost:${PORT}}`);
+    console.log(`Aplicação rodando em http://localhost:${PORT}`);
 });
