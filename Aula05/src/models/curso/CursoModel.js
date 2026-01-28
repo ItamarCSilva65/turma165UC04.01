@@ -23,7 +23,7 @@ export class CursoModel {
             return false;
         }
         cursos[index] = {
-            id : Id,
+            id : parseInt(Id),
             nome : nome
         };
         return cursos[index];
@@ -39,6 +39,9 @@ export class CursoModel {
     }
 
     static listarAlunosPorCurso(cursoId) {
+        return alunos.filter(a => a.cursoId === parseInt(idCurso));
+    }
+}
         
 
 

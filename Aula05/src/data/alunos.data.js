@@ -19,3 +19,4 @@ export const alunos = [
       email: "carlos.gomes@email.com",
       cursoId: 2
     },
+  ]
