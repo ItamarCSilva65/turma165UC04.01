@@ -7,11 +7,12 @@ import jwt from "jsonwebtoken";
 export class UsuarioController{
     static listarUsuarios(req, res){
         try {
+            const usuario = req.usuario; // Dados do usuário autenticado
             const usuarios = UsuarioModel.listarUsuarios();
             if (usuarios || usuarios.lenght === 0){
                 res.status(404).json({msg: "Nenhum usuario cadastrado!"}); 
             }
-            res,status(200).json({msg: "Usuários encontrados", usuarios});
+            res.status(200).json({msg: "Usuários encontrados", solicitante: usuarios.nome, usuarios});
         } catch (error) {
             res.status(500).json({msg: "Erro interno ao listar usuários", erro: error.message});
         }
@@ -116,14 +117,14 @@ export class UsuarioController{
                 email: email,
                 senha: senhaHash
             }
-            const usuarioAtualizado = UsuarioModel.atualizarUsuario(id, novosDados);
+            const usuarioAtualizado = UsuarioModel.atualizarUsuario(id, novoUsuario);
             if(!usuarioAtualizado){
-                res.status(404).json({msg: "Nenhum usuario encontrado."});
+                res.status(404).json({msg: "Nenhum usuário encontrado."});
                 return;
             }
             res.status(201).json({msg: "Usuário atualizado com sucesso", usuarioAtualizado});
         } catch (error) {
-            res.status(500).json({msg: "erro inteno ao utilizar usuário", erro: error.message});
+            res.status(500).json({msg: "erro interno ao atualizar usuário", erro: error.message});
         }
     }
     static async atualizarParcialmente(req, res){

@@ -3,19 +3,23 @@ import express from "express";
 
 const router = express.Router();
 
-router.get("/", UsuarioController.listarUsuarios);
+//Rotas públicas
 
-router.post("/", UsuarioController.criarUsuariio);
-
+router.post("/", UsuarioController.criarUsuario);
 router.post("/login", UsuarioController.loginUsuario);
 
-router.get("/:id", UsuarioController.buscarPorId);
 
-router.delete("/:id", UsuarioController.deletarUser);
+//Rotas privadas
 
-router.put("/:id", UsuarioController.atualizarUsuario);
+router.get("/", autenticarToken, UsuarioController.listarUsuarios);
 
-router.patch("/:id", UsuarioController.atualizarParcialmente);
+router.get("/:id", autenticarToken, UsuarioController.buscarPorId);
+
+router.delete("/:id", autenticarToken, UsuarioController.deletarUser);
+
+router.put("/:id", autenticarToken, UsuarioController.atualizarUsuario);
+
+router.patch("/:id", autenticarToken, UsuarioController.atualizarParcialmente);
 
 
 
