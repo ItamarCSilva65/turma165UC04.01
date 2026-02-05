@@ -8,6 +8,9 @@ export function autenticarToken(req, res, next){
     //Extrair o token do header (remover o "Bearer")
     const token = autHeader && autHeader.split(" ")[1];
     //Se não houver token, retorna erro 401 (não autorizado)
+
+    //Tenta pegar do cokie: token  
+
     if(!token){
         res.satus(401).json({msg: "Acesso negado - token não fornecido"});
         return;

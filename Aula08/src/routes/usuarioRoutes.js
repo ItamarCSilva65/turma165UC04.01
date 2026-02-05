@@ -1,10 +1,11 @@
-import { UsuarioController } from "../controllers/UsuarioControllers.js";
+import { UsuarioController } from "../controllers/UsuarioController.js";
 import express from "express";
 
 const router = express.Router();
 
 //Rotas públicas
 
+router.get("/login", )
 router.post("/", UsuarioController.criarUsuario);
 router.post("/login", UsuarioController.loginUsuario);
 

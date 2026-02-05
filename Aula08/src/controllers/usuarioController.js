@@ -8,6 +8,7 @@ export class UsuarioController{
     static listarUsuarios(req, res){
         try {
             const usuario = req.usuario; // Dados do usuário autenticado
+
             const usuarios = UsuarioModel.listarUsuarios();
             if (usuarios || usuarios.lenght === 0){
                 res.status(404).json({msg: "Nenhum usuario cadastrado!"}); 
@@ -66,7 +67,11 @@ export class UsuarioController{
         {expiresIn: "1h"} //Tempo de expiração do Token
     )
 
-
+    res.cookie("token", token, {
+        httpOnly: true, // Aacessível apenas via protocolo HTTP
+        maxAge: 60 * 60 * 1000, // equivale a 1 hora em milissegundos
+        sameSite: "Lax" 
+    })
     res.status(200).json({msg: "Login realizado com sucesso!", usuario:usuario.nome, token});
 
         }catch (error) {
@@ -146,6 +151,10 @@ export class UsuarioController{
         } catch (error) {
             res.status(500).json({msg: "Erro interno ao atualizar parcialmente o usuário", erro: error.message});
         }
+
+    }
+    static paginaLogin(req,res){
+        
     }
 
 }
